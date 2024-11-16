@@ -1,16 +1,20 @@
 <nav class="navbar navbar-dark bg-primary">
-  <a class="navbar-brand" href="/">Incidencias CRUD</a>
+  <a class="navbar-brand" href="/">Usuarios CRUD</a>
 </nav>
 <div class="container">
   <div class="row">
     <div class="col-md-8">
       <ul class="list-group">
-
+        <li 
+          *ngFor="let usuario of usuarioArray"
+          class="list-group-item">
+          {{usuario}}
+        </li>
       </ul>
       <div class="card mt-4">
         <div class="card-body">
           <div class="card-tittle">
-            Ingrese una nueva incidencia
+            Ingrese un nuevo usuario
           </div>
         </div>
       </div>
