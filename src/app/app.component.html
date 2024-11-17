@@ -1,29 +1,51 @@
 <nav class="navbar navbar-dark bg-primary">
   <a class="navbar-brand" href="/">Usuarios CRUD</a>
 </nav>
+
 <div class="container">
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-8 mt-4">
+      <!-- Lista de usuarios -->
       <ul class="list-group">
-        <li 
-          *ngFor="let usuario of usuarioArray"
-          class="list-group-item">
+        <li *ngFor="let usuario of usuarioArray" class="list-group-item">
           {{usuario.id}} - {{usuario.nombre}} - {{usuario.pais}}
         </li>
       </ul>
+
+      <!-- Formulario para agregar un usuario -->
       <div class="card mt-4">
         <div class="card-body">
-          <div class="card-tittle">
+          <div class="card-title">
             Ingrese un nuevo usuario
           </div>
+
+          <!-- Campo para nombre -->
+          <div class="form-group">
+            <input type="text" 
+                   (input)="onNombreChange($event)" 
+                   placeholder="Inserta un nombre" 
+                   class="form-control">
+          </div>
+
+          <!-- Campo para país -->
+          <div class="form-group">
+            <input type="text" 
+                   (input)="onPaisChange($event)" 
+                   placeholder="Inserta un país" 
+                   class="form-control">
+          </div>
+
+          <!-- Botón para agregar usuario -->
+          <button (click)="agregar()" class="btn btn-primary">
+            Enviar
+          </button>
         </div>
       </div>
     </div>
+
+    <!-- Imagen a la derecha -->
     <div class="col-md-4">
       <img src="https://pando.es/wp-content/uploads/Pando-icono-SAT.png" alt="Imagen representativa">
     </div>
   </div>
 </div>
-
-
-
