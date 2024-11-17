@@ -29,26 +29,15 @@ export class AppComponent {
     this.selectedUsuario.pais = event.target.value;
   }
 
-  // Método para agregar o actualizar el usuario
   agregar() {
-    if (this.selectedUsuario.id) {
-      // Si ya tiene id, actualizar el usuario
-      const index = this.usuarioArray.findIndex(usuario => usuario.id === this.selectedUsuario.id);
-      if (index !== -1) {
-        this.usuarioArray[index] = { ...this.selectedUsuario };
-      }
-    } else {
-      // Si no tiene id, agregar un nuevo usuario
-      this.selectedUsuario.id = this.usuarioArray.length + 1;
-      this.usuarioArray.push({ ...this.selectedUsuario });
-    }
+    // Asegura que el id se asigne correctamente
+    this.selectedUsuario.id = this.usuarioArray.length + 1;
+
+    // Agregar el nuevo usuario a la lista
+    this.usuarioArray.push({ ...this.selectedUsuario });
 
     // Reiniciar el formulario
     this.selectedUsuario = new Usuario();
   }
-
-  // Método para abrir el formulario de edición con los datos del usuario seleccionado
-  abriredit(usuario: Usuario) {
-    this.selectedUsuario = { ...usuario };  // Hacemos una copia del usuario para evitar referencias
-  }
 }
+
