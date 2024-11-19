@@ -41,7 +41,7 @@ export class AppComponent {
     // Asegura que el id se asigne correctamente
     
     // Agregar el nuevo usuario a la lista
-    this.usuarioArray.push({ ...this.selectedUsuario });
+    //this.usuarioArray.push({ ...this.selectedUsuario });
 
     // Reiniciar el formulario
     this.selectedUsuario = new Usuario();
