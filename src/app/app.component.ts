@@ -14,50 +14,37 @@ export class AppComponent {
 [x: string]: any;
   usuarioArray: Usuario[] = [
     { id: 1, nombre: "Juan", pais: "Colombia" },
-    { id: 2, nombre: "María", pais: "México" },
-    { id: 3, nombre: "Pedro", pais: "Argentina" }
+    { id: 2, nombre: "María", pais: "Colombia" },
+    { id: 3, nombre: "Pedro", pais: "Colombia" }
   ];
 
-  selectedUsuario: Usuario = { id: 0, nombre: '', pais: '' };
-  nombre: string = '';
-  pais: string = '';
-  
-  
+  selectedUsuario: Usuario = new Usuario(); // Instancia de Usuario vacía
+
   openForEdit(usuario: Usuario){
     this.selectedUsuario = usuario;
-    this.nombre = usuario.nombre;
-    this.pais = usuario.pais;
   }
   // Método para manejar los cambios en el campo 'nombre'
   onNombreChange(event: any) {
-    const input = event.target as HTMLInputElement;
-    this.nombre = input.value;
-    this.selectedUsuario.nombre = input.value;
+    this.selectedUsuario.nombre = event.target.value;
   }
 
   // Método para manejar los cambios en el campo 'pais'
   onPaisChange(event: any) {
-    const input = event.target as HTMLInputElement;
-    this.pais = input.value;
-    this.selectedUsuario.pais = input.value;
+    this.selectedUsuario.pais = event.target.value;
   }
 
-  agregar(): void {
-    if (this.selectedUsuario.id === 0) {
-      const newId = this.usuarioArray.length + 1;
-      this.usuarioArray.push({
-        id: newId,
-        nombre: this.nombre,
-        pais: this.pais
-      });
-    } else {
-      const index = this.usuarioArray.findIndex(u => u.id === this.selectedUsuario.id);
-      if (index > -1) {
-        this.usuarioArray[index].nombre = this.nombre;
-        this.usuarioArray[index].pais = this.pais;
-      }
+  agregar() {
+    if(this.selectedUsuario.id === 0){
+      this.selectedUsuario.id = this.usuarioArray.length + 1;
+      this.usuarioArray.push(this.selectedUsuario);
     }
-    this.resetForm();
+    // Asegura que el id se asigne correctamente
+    
+    // Agregar el nuevo usuario a la lista
+    this.usuarioArray.push({ ...this.selectedUsuario });
+
+    // Reiniciar el formulario
+    this.selectedUsuario = new Usuario();
   }
 
   delete(){
@@ -65,12 +52,6 @@ export class AppComponent {
     this.usuarioArray = this.usuarioArray.filter(x => x != this.selectedUsuario);
     this.selectedUsuario = new Usuario();
     }
-  }
-
-  resetForm(): void {
-    this.selectedUsuario = { id: 0, nombre: '', pais: '' };
-    this.nombre = '';
-    this.pais = '';
   }
 }
 
