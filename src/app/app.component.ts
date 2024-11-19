@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+[x: string]: any;
   usuarioArray: Usuario[] = [
     { id: 1, nombre: "Juan", pais: "Colombia" },
     { id: 2, nombre: "María", pais: "Colombia" },
@@ -19,6 +20,9 @@ export class AppComponent {
 
   selectedUsuario: Usuario = new Usuario(); // Instancia de Usuario vacía
 
+  openForEdit(usuario: Usuario){
+    this.selectedUsuario = usuario;
+  }
   // Método para manejar los cambios en el campo 'nombre'
   onNombreChange(event: any) {
     this.selectedUsuario.nombre = event.target.value;
