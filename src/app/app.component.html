@@ -7,11 +7,13 @@
     <div class="col-md-8 mt-4">
       <!-- Lista de usuarios -->
       <ul class="list-group">
-        <li *ngFor="let usuario of usuarioArray" class="list-group-item"
-        (click)="openForEdit(usuario)"
+        <li 
+          *ngFor="let usuario of usuarioArray"
+          class="list-group-item list-group-item-action"
+          (click) ="openForEdit(usuario)"
+          [class.active]="usuario == selectedUsuario"
         >
-          {{usuario.id}} - {{usuario.nombre}} - {{usuario.pais}}
-          
+        <span class="badge badge-primary">{{usuario.id}}</span> {{usuario.nombre}} - {{usuario.pais}}
         </li>
       </ul>
 
@@ -21,7 +23,7 @@
           <div class="card-title">
             Ingrese un nuevo usuario
           </div>
-
+ 
           <!-- Campo para nombre -->
           <div class="form-group">
             <input type="text" 
@@ -41,6 +43,13 @@
           <!-- Botón para agregar usuario -->
           <button (click)="agregar()" class="btn btn-primary">
             Enviar
+          </button>
+          <button
+          *ngIf="selectedUsuario.id !== 0"
+          class="btn btn-danger"
+          (click)="delete()"
+            >
+          Delete
           </button>
         </div>
       </div>
