@@ -13,7 +13,7 @@
           (click) ="openForEdit(usuario)"
           [class.active]="usuario == selectedUsuario"
         >
-        <span class="badge badge-primary">{{usuario.id}}</span> {{usuario.nombre}} - {{usuario.pais}}
+        <span class="badge badge-primary">{{usuario.id}}</span> {{usuario.nombre}} - {{usuario.contrasenaCifrada}}
         </li>
       </ul>
 
@@ -32,20 +32,19 @@
                    class="form-control">
           </div>
 
-          <div class="container">
-            <h1>Seleccionar Cifrado</h1>
-            <label for="cifrado">Seleccione el tipo de cifrado:</label>
-            <select id="cifrado">
+          <div class="form-group">
+            <label for="cifrado">Seleccionar Cifrado</label>
+            <select [(ngModel)]="cifradoSeleccionado" id="cifrado" class="form-control">
               <option value="railFence">Rail Fence</option>
               <option value="rsa">RSA</option>
             </select>
-
-            <button id="aplicarCifrado">Aplicar Cifrado</button>
+          </div>
 
           <!-- Campo para país -->
           <div class="form-group">
             <input type="text" 
-                   (input)="onPaisChange($event)" 
+                   id = "password"
+                   (input)="onPasswordChange($event)" 
                    placeholder="Inserta una contraseña" 
                    class="form-control">
           </div>
