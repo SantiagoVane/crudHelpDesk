@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 export class CifradoService {
 
   constructor() { }
+  
   // Rail Fence Encrypt
   railFenceEncrypt(text: string, numRails: number): string {
     if (numRails <= 1) return text;
@@ -21,6 +22,27 @@ export class CifradoService {
     }
 
     return rail.flat().join('');
+  }
+
+
+ // Cifrado por sustitución
+ sustitucionEncrypt(text: string): string {
+  const alfabeto = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'; // Alfabeto en mayúsculas
+  const alfabetoCifrado = 'QAZWSXEDCRFVTGBYHNUJMIKOLP'; // Un ejemplo de alfabeto cifrado
+
+  let cifrado = '';
+  
+  // Recorrer cada caracter del texto
+  for (let char of text.toUpperCase()) {
+    const index = alfabeto.indexOf(char); // Buscar el índice de la letra en el alfabeto
+    if (index !== -1) {
+      cifrado += alfabetoCifrado[index]; // Reemplazar por la letra correspondiente
+    } else {
+      cifrado += char; // Si no está en el alfabeto (como un espacio o signo de puntuación), no se cambia
+    }
+  }
+
+  return cifrado;
   }
 
   // Rail Fence Decrypt
@@ -61,6 +83,37 @@ export class CifradoService {
 
     return result;
   }
+
+  // Transposición Encrypt
+  transposicionEncrypt(password: string): string {
+    const clave = 3; // Número de columnas o clave de transposición (ahora con 3 columnas)
+    const filas = Math.ceil(password.length / clave); // Calcular el número de filas necesarias
+    let matriz = Array(filas).fill('').map(() => Array(clave).fill('')); // Crear la matriz
+  
+    // Llenar la matriz con los caracteres del password
+    let index = 0;
+    for (let i = 0; i < filas; i++) {
+      for (let j = 0; j < clave; j++) {
+        if (index < password.length) {
+          matriz[i][j] = password[index]; // Asignar el carácter a la matriz
+          index++;
+        } else {
+          matriz[i][j] = ' '; // Relleno en caso de que falten caracteres
+        }
+      }
+    }
+  
+    // Leer la matriz por columnas para crear el texto cifrado
+    let cifrado = '';
+    for (let j = 0; j < clave; j++) {
+      for (let i = 0; i < filas; i++) {
+        cifrado += matriz[i][j]; // Concatenar los caracteres por columnas
+      }
+    }
+  
+    return cifrado; // Retornar el texto cifrado
+  }
+  
 
   // RSA Encrypt (placeholder)
   rsaEncrypt(text: string): string {
