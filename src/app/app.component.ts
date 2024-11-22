@@ -54,12 +54,13 @@ export class AppComponent {
 
     // Aplicar el cifrado según la selección
     if (this.cifradoSeleccionado === 'railFence') {
-      this.cifradoResultado = this.cifradoService.railFenceEncrypt(
-        this.password,
-        3
-      ); // Rail Fence con 3 rieles
-    } else if (this.cifradoSeleccionado === 'rsa') {
+      this.cifradoResultado = this.cifradoService.railFenceEncrypt(this.password,3); // Rail Fence con 3 rieles
+    }if (this.cifradoSeleccionado === 'rsa') {
       this.cifradoResultado = this.cifradoService.rsaEncrypt(this.password); // RSA
+    }if (this.cifradoSeleccionado === 'transposicion'){
+      this.cifradoResultado = this.cifradoService.transposicionEncrypt(this.password);
+    }if (this.cifradoSeleccionado === 'sustitucion'){
+      this.cifradoResultado = this.cifradoService.sustitucionEncrypt(this.password);
     }
 
     // Simular el envío al backend (puedes reemplazar esto con una llamada HTTP)
@@ -100,4 +101,3 @@ export class AppComponent {
     }
   }
 }
-
